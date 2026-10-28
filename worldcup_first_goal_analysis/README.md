@@ -1,38 +1,42 @@
-# FIFA World Cup First-Goal Analysis (1990–2026)
+# การวิเคราะห์ประตูแรกในการแข่งขันฟุตบอลโลก FIFA World Cup (1990–2026)
 
-## Project Overview
+## ภาพรวมโปรเจกต์ (Project Overview)
 
-This project explores whether the team that scores the first goal tends to win a FIFA World Cup match, and examines how red cards received by that team are associated with match outcomes.
+โปรเจกต์นี้ศึกษาว่า ทีมที่ทำประตูแรกมีแนวโน้มที่จะชนะการแข่งขันฟุตบอลโลก FIFA World Cup หรือไม่ และวิเคราะห์เพิ่มเติมว่าใบแดงที่ทีมดังกล่าวได้รับมีความสัมพันธ์กับผลการแข่งขันอย่างไร
 
-The project uses Python for data collection, cleaning, exploratory analysis, and visualization. It is designed to demonstrate a reproducible analytics workflow: translating questions into measurable outcomes, checking data quality, analyzing patterns, and communicating limitations.
+โปรเจกต์นี้ใช้ Python ในการรวบรวมข้อมูล ทำความสะอาดข้อมูล วิเคราะห์ข้อมูลเบื้องต้น (Exploratory Data Analysis) และสร้างภาพแสดงข้อมูล (Data Visualization) โดยออกแบบให้แสดงกระบวนการวิเคราะห์ข้อมูลที่สามารถทำซ้ำได้ ตั้งแต่การเปลี่ยนคำถามให้เป็นตัวชี้วัดที่วัดผลได้ การตรวจสอบคุณภาพข้อมูล การวิเคราะห์รูปแบบที่พบ ไปจนถึงการสื่อสารข้อจำกัดของผลการวิเคราะห์
 
-> **Project status: validation in progress.** The original notebook contains inconsistencies between data-collection and visualization cells. Reported counts and percentages should be treated as provisional until the notebook is refactored and rerun from top to bottom.
+> **สถานะโปรเจกต์: อยู่ระหว่างการตรวจสอบความถูกต้อง**
+>
+> Notebook ฉบับต้นฉบับมีความไม่สอดคล้องกันระหว่างเซลล์ที่รวบรวมข้อมูลกับเซลล์ที่สร้างกราฟ ดังนั้น จำนวนข้อมูลและเปอร์เซ็นต์ที่รายงานไว้จึงยังเป็นเพียงค่าเบื้องต้น จนกว่าจะปรับปรุงโค้ดและรัน Notebook ใหม่ตั้งแต่ต้นจนจบ
 
-## Business / Analytical Questions
+## คำถามทางธุรกิจและคำถามเชิงวิเคราะห์ (Business / Analytical Questions)
 
-1. Among matches with at least one recorded goal, how often does the first-scoring team win, draw, or lose?
-2. How often does the first-scoring team fail to win after scoring first?
-3. Within this dataset, how are red cards for the first-scoring team associated with its match outcome?
+1. ในการแข่งขันที่มีการบันทึกว่ามีประตูเกิดขึ้นอย่างน้อยหนึ่งประตู ทีมที่ทำประตูแรกชนะ เสมอ หรือแพ้บ่อยเพียงใด?
+2. ทีมที่ทำประตูแรกไม่สามารถคว้าชัยชนะได้บ่อยเพียงใด?
+3. ภายในชุดข้อมูลนี้ การได้รับใบแดงของทีมที่ทำประตูแรกมีความสัมพันธ์กับผลการแข่งขันของทีมนั้นอย่างไร?
 
-## Data Source
+## แหล่งข้อมูล (Data Source)
 
-- **Source:** [openfootball/worldcup.json](https://github.com/openfootball/worldcup.json)
-- **Coverage intended by the original notebook:** FIFA World Cup editions from 1990 through 2026.
-- **Unit of analysis:** One match.
-- **Fields used or intended:** tournament year, round, teams, score, goal minute, first-scoring team, match outcome, and red-card information.
+- **แหล่งข้อมูล:** [openfootball/worldcup.json](https://github.com/openfootball/worldcup.json)
+- **ช่วงปีการแข่งขันที่ Notebook ฉบับเดิมตั้งใจครอบคลุม:** ฟุตบอลโลก FIFA World Cup ตั้งแต่ปี 1990 ถึง 2026
+- **หน่วยที่ใช้ในการวิเคราะห์:** การแข่งขันหนึ่งนัด
+- **ตัวแปรที่ใช้หรือมีแผนจะใช้:** ปีที่จัดการแข่งขัน รอบการแข่งขัน ทีมที่แข่งขัน คะแนน นาทีที่ทำประตู ทีมที่ทำประตูแรก ผลการแข่งขัน และข้อมูลใบแดง
 
-The dataset is collected from the source repository by the notebook. Coverage, schema differences across tournament years, and completeness of event-level goal/card data must be validated before interpreting the results. The analysis excludes matches without a recorded goal, so findings do not describe all World Cup matches.
+Notebook จะดึงข้อมูลจาก Repository ต้นทางโดยตรง โดยต้องตรวจสอบความครอบคลุมของข้อมูล ความแตกต่างของโครงสร้างข้อมูลระหว่างปีการแข่งขัน และความครบถ้วนของข้อมูลเหตุการณ์ระดับประตูและใบแดง ก่อนนำผลวิเคราะห์ไปตีความ
 
-## Methods
+การวิเคราะห์จะตัดการแข่งขันที่ไม่มีการบันทึกประตูออก ดังนั้น ผลการวิเคราะห์จึงไม่ได้อธิบายการแข่งขันฟุตบอลโลกทั้งหมด
 
-1. Retrieve match records from the source repository.
-2. Normalize match and round fields across source formats.
-3. Identify the first-scoring team from goal-event minutes.
-4. Determine the match outcome, distinguishing regulation time, extra time, and penalties where the source supports that distinction.
-5. Analyze outcomes overall and compare outcomes by red-card status.
-6. Visualize counts and proportions, while reporting sample sizes and limitations.
+## วิธีการวิเคราะห์ (Methods)
 
-## Tools
+1. ดึงข้อมูลการแข่งขันจาก Repository ต้นทาง
+2. ปรับรูปแบบข้อมูลการแข่งขันและรอบการแข่งขันให้เป็นมาตรฐานเดียวกัน เพื่อรองรับความแตกต่างของรูปแบบข้อมูลจากแต่ละแหล่งหรือแต่ละปี
+3. ระบุทีมที่ทำประตูแรกจากนาทีที่เกิดเหตุการณ์ประตู
+4. จำแนกผลการแข่งขัน โดยแยกผลในเวลาปกติ การต่อเวลาพิเศษ และการดวลจุดโทษออกจากกัน ในกรณีที่แหล่งข้อมูลรองรับการแยกประเภทดังกล่าว
+5. วิเคราะห์ผลการแข่งขันโดยรวม และเปรียบเทียบผลลัพธ์ตามสถานะการได้รับใบแดง
+6. สร้างกราฟแสดงจำนวนและสัดส่วน พร้อมรายงานขนาดตัวอย่างและข้อจำกัดของข้อมูล
+
+## เครื่องมือที่ใช้ (Tools)
 
 - Python
 - pandas
@@ -40,47 +44,51 @@ The dataset is collected from the source repository by the notebook. Coverage, s
 - seaborn
 - Jupyter Notebook
 
-## Repository Structure
+## โครงสร้าง Repository
 
 ```text
 worldcup-first-goal-analysis/
 ├── README.md
-├── DATA_QUALITY_REVIEW.md
-├── requirements.txt
 ├── Football_Game.ipynb
-├── data/                 # Optional; add only appropriately licensed/reusable data
-└── images/               # Exported charts for the README, after validation
 ```
 
-## How to Run
+## วิธีเรียกใช้งาน (How to Run)
 
-1. Install the dependencies listed in `requirements.txt`.
-2. Open `Football_Game.ipynb` in Jupyter Notebook or Google Colab.
-3. Run all cells from top to bottom.
-4. Confirm that the data-quality checks pass and that the generated counts match the summary tables before relying on the results.
+1. ติดตั้งไลบรารีที่ระบุไว้ในไฟล์ `requirements.txt`
+2. เปิดไฟล์ `Football_Game.ipynb` ด้วย Jupyter Notebook หรือ Google Colab
+3. รันทุกเซลล์ตามลำดับตั้งแต่ต้นจนจบ
+4. ตรวจสอบว่าการตรวจสอบคุณภาพข้อมูลผ่านทั้งหมด และจำนวนข้อมูลที่ได้ตรงกับตารางสรุป ก่อนนำผลลัพธ์ไปใช้อ้างอิง
 
-The notebook retrieves data from GitHub, so running the data-collection step requires an internet connection. The notebook should be refactored so that data collection and cleaning happen once and later cells reuse the same validated DataFrame.
+Notebook จะดึงข้อมูลจาก GitHub ดังนั้น ขั้นตอนการรวบรวมข้อมูลจึงจำเป็นต้องเชื่อมต่ออินเทอร์เน็ต
 
-## Key Findings
+ควรปรับปรุง Notebook ให้รวบรวมและทำความสะอาดข้อมูลเพียงครั้งเดียว แล้วให้เซลล์ถัดไปใช้ DataFrame ชุดเดียวกันที่ผ่านการตรวจสอบความถูกต้องแล้ว
 
-**Pending validation.** The original notebook reports that teams scoring first win more often than they lose, and that the red-card subgroup has a lower observed win rate. These results are not presented as final findings here because the original cells use inconsistent DataFrame schemas and the red-card counting logic may double-count events. Recompute all figures after fixing the issues documented in `DATA_QUALITY_REVIEW.md`.
+## ผลการวิเคราะห์ที่สำคัญ (Key Findings)
 
-## Limitations
+**อยู่ระหว่างการตรวจสอบความถูกต้อง**
 
-- The dataset covers only the tournament editions and records available in the selected source repository.
-- Matches with no recorded goals are excluded from first-goal analysis.
-- Goal-event minutes can include added time; parsing only the first integer can lose ordering information (for example, `45+2`).
-- Red-card information must be deduplicated and card-type definitions verified.
-- The original analysis counts red cards across the match rather than restricting them to events occurring after the first goal.
-- The number of matches in the red-card subgroup may be small; subgroup percentages can therefore be unstable.
-- Observational associations do not establish causation. Team strength, match state, timing of cards, and other factors may influence outcomes.
-- Penalty shoot-outs are not equivalent to goals scored during open play and should be reported separately from regulation/extra-time outcomes.
+Notebook ฉบับต้นฉบับรายงานว่า ทีมที่ทำประตูแรกมีอัตราชนะสูงกว่าอัตราแพ้ และกลุ่มทีมที่ได้รับใบแดงมีอัตราชนะที่สังเกตได้ต่ำกว่า
 
-## Next Improvements
+อย่างไรก็ตาม ยังไม่นำเสนอผลดังกล่าวเป็นข้อค้นพบขั้นสุดท้าย เนื่องจากเซลล์ใน Notebook ใช้โครงสร้าง DataFrame ที่ไม่สอดคล้องกัน และวิธีนับใบแดงอาจทำให้เกิดการนับเหตุการณ์ซ้ำ
 
-- Refactor extraction and transformation into one reusable pipeline.
-- Add automated data-quality checks and a data dictionary.
-- Verify score semantics and event schemas against the source files.
-- Recalculate every summary from the same cleaned dataset.
-- Add a concise findings section only after validation.
-- Export clean, accessible charts with labels and sample sizes.
+จึงต้องคำนวณตัวเลขทั้งหมดใหม่ หลังจากแก้ไขปัญหาที่ระบุไว้ในไฟล์ `DATA_QUALITY_REVIEW.md`
+
+## ข้อจำกัดของการวิเคราะห์ (Limitations)
+
+- ชุดข้อมูลครอบคลุมเฉพาะปีการแข่งขันและรายการแข่งขันที่มีอยู่ใน Repository ต้นทางที่เลือกใช้
+- การวิเคราะห์เรื่องประตูแรกไม่รวมการแข่งขันที่ไม่มีประตูที่บันทึกไว้
+- นาทีที่เกิดประตูอาจรวมช่วงทดเวลาบาดเจ็บ การดึงเฉพาะจำนวนเต็มตัวแรกอาจทำให้ลำดับเหตุการณ์ผิดพลาด เช่น `45+2`
+- ต้องกำจัดข้อมูลใบแดงที่ซ้ำกัน และตรวจสอบนิยามของประเภทใบแดงให้ถูกต้อง
+- การวิเคราะห์ฉบับเดิมนับใบแดงตลอดทั้งการแข่งขัน ไม่ได้จำกัดเฉพาะเหตุการณ์ที่เกิดหลังจากทำประตูแรก
+- จำนวนการแข่งขันในกลุ่มที่ได้รับใบแดงอาจมีน้อย ทำให้เปอร์เซ็นต์ของกลุ่มย่อยมีความผันผวนและไม่เสถียร
+- ความสัมพันธ์ที่พบจากข้อมูลเชิงสังเกตไม่ได้ยืนยันความเป็นเหตุและผล ความแข็งแกร่งของทีม สถานการณ์ระหว่างการแข่งขัน ช่วงเวลาที่ได้รับใบแดง และปัจจัยอื่น ๆ อาจมีอิทธิพลต่อผลการแข่งขัน
+- การดวลจุดโทษไม่ถือเป็นการทำประตูระหว่างการแข่งขันตามปกติ จึงควรรายงานแยกจากผลการแข่งขันในเวลาปกติและช่วงต่อเวลาพิเศษ
+
+## แนวทางการพัฒนาต่อ (Next Improvements)
+
+- ปรับโครงสร้างโค้ดให้การดึงข้อมูลและการแปลงข้อมูลอยู่ในกระบวนการเดียวที่สามารถนำกลับมาใช้ซ้ำได้
+- เพิ่มการตรวจสอบคุณภาพข้อมูลแบบอัตโนมัติและจัดทำพจนานุกรมข้อมูล (Data Dictionary)
+- ตรวจสอบความหมายของข้อมูลคะแนนและโครงสร้างข้อมูลเหตุการณ์กับไฟล์ต้นทาง
+- คำนวณตัวเลขสรุปทุกค่าจากชุดข้อมูลเดียวกันที่ผ่านการทำความสะอาดแล้ว
+- เพิ่มหัวข้อสรุปผลการวิเคราะห์ที่กระชับ หลังจากตรวจสอบความถูกต้องของข้อมูลแล้วเท่านั้น
+- ส่งออกกราฟที่อ่านง่าย มีป้ายกำกับชัดเจน และแสดงจำนวนตัวอย่างที่ใช้ในการวิเคราะห์
