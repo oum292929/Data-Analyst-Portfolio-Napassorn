@@ -1,53 +1,67 @@
-# Napassorn Nillawan
+# World Cup First Goal Analysis (1990–2026)
 
-**Data Analyst | Marketing & Finance Analytics**
-[City, Country] | Open to Data Analyst opportunities
+ชุดข้อมูลและ notebook สำหรับวิเคราะห์ว่า **ทีมที่ยิงประตูแรก (first score)** และ **การได้ใบแดง (red card)** มีผลต่อการแพ้/ชนะในฟุตบอลโลกหรือไม่
 
-I apply data analysis to support decision-making in marketing and finance. The projects below demonstrate my skills in SQL, Python, statistical analysis, and the communication of findings to business stakeholders.
+## คำถามที่ต้องการตอบ
 
-**Contact:** [Email] | [LinkedIn URL]
+1. ทีมที่ยิงประตูแรกในแมตช์ฟุตบอลโลก ชนะ เสมอ หรือแพ้ กี่เปอร์เซ็นต์?
+2. ทีมที่ได้ขึ้นนำก่อน "เสียความได้เปรียบ" (แพ้ทั้งที่ยิงก่อน) บ่อยแค่ไหน?
+3. ถ้าทีมที่ยิงประตูแรกโดนใบแดง โอกาสชนะลดลงหรือไม่?
+4. ในแมตช์ที่ตัดสินกันภายในเวลาปกติ (Full Time) ทีมที่ยิงก่อนและมี 0 ใบแดง เทียบกับมี 1 ใบแดงขึ้นไป อัตราชนะต่างกันเท่าไร?
 
----
+## แหล่งข้อมูล
 
-## Technical Skills
+- **openfootball/worldcup.json** (GitHub): `https://raw.githubusercontent.com/openfootball/worldcup.json/master/{year}/worldcup-full.json`
+- ปีที่ใช้: 1990, 1994, 1998, 2002, 2006, 2010, 2014, 2018, 2022, 2026
+- ข้อมูลที่ดึงจากแต่ละแมตช์:
+  - รอบการแข่งขัน (round)
+  - ทีมที่ 1 / ทีมที่ 2
+  - สกอร์ (เวลาปกติ `ft`, ต่อเวลา `et`, ดวลจุดโทษ `p`)
+  - ประตู (ทีมที่ยิง และนาทีที่ยิง)
+  - ใบเตือน (`bookings` / `cards`) เฉพาะใบแดง (`R`, `SY`, `red`)
 
-| Area | Tools |
+## ขั้นตอนประมวลผล
+
+1. ดึง JSON ของแต่ละปี แล้วรวมแมตช์จากรูปแบบข้อมูลที่ต่างกัน (`extract_matches_safely`)
+2. จัดรอบให้เป็นมาตรฐาน: `Group, R32, R16, QF, SF, 3rd, Final` (`map_round_category`)
+3. **ตัดแมตช์ที่ไม่มีประตู (0-0)** ออก เพราะไม่มีทีมที่ยิงก่อน
+4. เรียงประตูตามนาที เพื่อหาทีมที่ยิงประตูแรก
+5. ตัดสินผลของทีมที่ยิงก่อน ตามลำดับ: เวลาปกติ (FT) → ต่อเวลา (ET) → จุดโทษ (P)
+6. นับใบแดงของทีมที่ยิงประตูแรก
+7. บันทึกเป็นไฟล์ `worldcup_first_goals_1990_2026.csv` (604 แมตช์)
+
+## คอลัมน์ในไฟล์ CSV
+
+| คอลัมน์ | ความหมาย |
 |---|---|
-| Querying and Databases | SQL (SQLite, PostgreSQL, MySQL) |
-| Analysis | Python (pandas, NumPy, matplotlib, seaborn), Excel |
-| Visualization | [Power BI / Tableau / Looker Studio] |
-| Other | Git and GitHub, Jupyter Notebook |
+| Year | ปีที่จัดฟุตบอลโลก |
+| Round | รอบการแข่งขัน (Group, R32, R16, QF, SF, 3rd, Final) |
+| Match | คู่แข่งขัน (Team1 vs. Team2) |
+| First Scoring Country | ทีมที่ยิงประตูแรก |
+| First Goal Minute | นาทีที่ยิงประตูแรก (`N/A` ถ้าไม่มีข้อมูล) |
+| Final Score | สกอร์สุดท้าย (รวมต่อเวลา และจุดโทษถ้ามี) |
+| First Scorer Outcome | ผลของทีมที่ยิงก่อน: `Win (FT)`, `Draw`, `Loss (FT)`, `Win (ET)`, `Loss (ET)`, `Win (P)`, `Loss (P)` |
+| First Scorer Red Cards | จำนวนใบแดงของทีมที่ยิงก่อน (ทั้งแมตช์) |
 
----
+> หมายเหตุ: cell วิเคราะห์ตัวที่ 2 สร้างตารางอีกแบบที่มีคอลัมน์ `Lead Held?` (ยิงก่อนแล้วรักษาความได้เปรียบไว้ได้หรือไม่) แทนคอลัมน์ใบแดง
 
-## Projects
+## การวิเคราะห์และกราฟใน notebook
 
-### 1. [Customer Segmentation Using RFM Analysis (Marketing)](./01-marketing-rfm-segmentation)
-Segments customers by recency, frequency, and monetary value to identify target groups for marketing campaigns.
-**Tools:** SQL, Python (pandas)
-**Key finding:** [One-line summary of the main result]
+1. **Match Outcomes for the First Scoring Team** (กราฟแท่ง + กราฟวงกลม)
+   จำนวนและสัดส่วนผลแพ้/เสมอ/ชนะของทีมที่ยิงก่อน แยกตาม FT, ET, จุดโทษ และสรุปรวมเป็น Win / Draw / Loss
+2. **First Scorer Red Cards by Outcome** (กราฟแท่งซ้อน)
+   แต่ละผลการแข่งขัน (ไม่รวมจุดโทษ) มีกี่แมตช์ที่ทีมยิงก่อนได้ 0 ใบแดง เทียบกับ 1 ใบแดงขึ้นไป
+3. **Impact of Red Cards on First Scorer FT Outcome** (กราฟแท่งซ้อน 100%)
+   เทียบอัตราชนะ/แพ้ในเวลาปกติ ระหว่างทีมที่ไม่มีใบแดงกับทีมที่มี 1+ ใบแดง
 
-### 2. [Stock Risk and Return Analysis (Finance)](./02-finance-stock-risk-return)
-Evaluates the returns, volatility, Sharpe ratio, maximum drawdown, and correlations of multiple stocks to inform portfolio allocation.
-**Tools:** Python (pandas, yfinance, matplotlib)
-**Key finding:** [One-line summary of the main result]
+## ข้อควรระวังในการตีความ
 
----
+- ข้อมูลใบแดงนับ **ทั้งแมตช์** ไม่ได้ดูว่าใบแดงเกิดก่อนหรือหลังประตูแรก
+- ความครบถ้วนของข้อมูลใบเตือนในแต่ละปีไม่เท่ากัน ถ้าบางปีไม่มีข้อมูล จะนับเป็น 0 ใบแดง
+- จำนวนแมตช์ที่ทีมยิงก่อนได้ใบแดงมีน้อย ผลเปรียบเทียบจึงมีความไม่แน่นอนสูง
+- ผลที่ได้เป็นความสัมพันธ์ ไม่ใช่เหตุและผล (ทีมที่แข็งกว่าอาจยิงก่อนบ่อยกว่าอยู่แล้ว)
+- ผลต่อเวลาและจุดโทษถูกแยกจากเวลาปกติ เพราะธรรมชาติของเกมต่างกัน
 
-## Repository Structure
+## วิธีรันซ้ำ
 
-```
-.
-├── README.md
-├── 01-marketing-rfm-segmentation/
-│   ├── README.md
-│   ├── data/
-│   ├── sql/rfm_analysis.sql
-│   ├── src/rfm_analysis.py
-│   └── images/
-└── 02-finance-stock-risk-return/
-    ├── README.md
-    ├── data/
-    ├── src/stock_analysis.py
-    └── images/
-```
+ต้องใช้ `pandas`, `matplotlib`, `seaborn` และการเชื่อมต่ออินเทอร์เน็ต (ดึงข้อมูลจาก GitHub) เปิด `Football_Game.ipynb` ใน Google Colab แล้วรันทุก cell ตามลำดับ
