@@ -1,93 +1,90 @@
-# Hi 👋 Welcome to My Data Analytics Portfolio
+# Hi, I'm an Aspiring Data Analyst 👋
 
-This repository is a collection of projects I am building while pursuing my master's degree. Through these projects, I aim to apply what I learn in class, strengthen my technical skills, and practice turning data into clear, evidence-based insights that can support business decisions.
+I am a graduate student at **Chulalongkorn University** with a background in Surveying Engineering and a growing focus on Data Analytics. I am building my analytical and technical skills through graduate coursework and hands-on projects, with an emphasis on using data to answer questions, identify patterns, and support evidence-based decisions.
 
-## About Me
+My engineering background has shaped my structured problem-solving approach, while my ongoing studies and projects allow me to develop practical skills in Python, SQL, statistical analysis, and data visualization.
 
-I hold a bachelor's degree in **Surveying Engineering from Chulalongkorn University** and am currently pursuing a master's degree in **Data Science and Statistics / Data Science** at Chulalongkorn University.
+I am interested in opportunities where I can apply analytical thinking, continue learning, and turn data into meaningful business insights.
 
-Although my undergraduate degree was not directly related to Data Analytics, I am committed to building the skills needed to move into this field. I am learning through coursework and hands-on projects, with a focus on programming, data preparation, statistical analysis, and communicating findings in a practical way.
+## 🎓 Education
 
-I believe learning goes beyond the classroom. That is why I am creating my own projects to practice solving problems, learn from the process, and build a portfolio that reflects my progress.
+**Master's Degree in [Official Program Name]**  
+Chulalongkorn University | In Progress
 
-My goal is to turn data into useful insights that are understandable, supported by evidence, and relevant to decision-making.
+- Developing skills in data analysis, statistics, and data visualization.
+- Applying concepts from coursework through practical analytical projects.
 
-## Education & Coursework
+**Bachelor of Engineering in Surveying Engineering**  
+Faculty of Engineering, Chulalongkorn University | GPA: 3.56/4.00
 
-### Master's Degree — Data Science and Statistics / Data Science
-**Chulalongkorn University | In Progress**
+- Built a foundation in quantitative analysis and structured problem-solving.
+- Relevant coursework: Calculus I, Calculus II, and Statistics I.
 
-Relevant subjects and topics I am studying or practicing:
-- [ ] Data Visualization
-- [ ] Probability and Statistics
-- [ ] Data Analysis with Python
-- [ ] SQL for Data Analysis
-- [ ] [Add current course name]
-- [ ] [Add completed course name]
+## 🛠️ Technical Skills
 
-*Note: Replace these topic labels with the official course titles and update each item to reflect your actual coursework.*
+- **Python:** Data exploration, data cleaning, and analysis using `pandas`
+- **SQL:** Data filtering, aggregation, grouping, and analytical queries
+- **Exploratory Data Analysis:** Examining data quality, distributions, and relationships between variables
+- **Data Visualization:** Using charts to communicate patterns and analytical findings
+- **Analytical Thinking:** Defining business questions, interpreting results, and considering data limitations
 
-### Bachelor's Degree — Surveying Engineering
-**Faculty of Engineering, Chulalongkorn University | GPA: 3.56**
+*I am continuously strengthening these skills through coursework and hands-on practice.*
 
-My undergraduate background helped me develop structured problem-solving skills and experience working with quantitative information.
+## 📊 Featured Projects
 
-Relevant foundational courses:
-- Calculus I
-- Calculus II
-- Statistics I
+### 1. Bank Marketing Analysis | Python & SQL
 
-## Skills I Am Developing
-
-- **Python:** Exploring and preparing data with `pandas`, and creating charts to communicate findings.
-- **SQL:** Filtering, grouping, aggregating, and comparing data using queries.
-- **Exploratory Data Analysis (EDA):** Reviewing data structure, missing values, duplicates, and variable distributions.
-- **Data Visualization:** Choosing suitable charts to answer analytical questions.
-- **Business Thinking:** Connecting findings to potential business decisions while acknowledging data limitations.
-
-These are skills I am continuing to develop through coursework and practical projects.
-
-## Projects
-
-### 1. Bank Marketing Analysis — Python + SQL
 **Status:** In Progress
 
-This project explores bank term-deposit subscription data. It is designed to practice data quality checks, exploratory analysis, and comparisons of subscription rates across customer groups.
+**Objective:** Explore customer and campaign characteristics associated with term-deposit subscriptions and practice translating analytical results into potential business insights.
 
-What I am practicing:
-- Checking missing values, duplicate records, and categorical values such as `unknown`
-- Using Python for exploratory data analysis and visualization
-- Writing SQL queries to compare subscription counts and rates across groups
-- Translating findings into business recommendations without overstating causation
+**Key activities:**
+- Inspecting data quality, missing values, duplicates, and categorical values.
+- Conducting exploratory data analysis using Python.
+- Comparing subscription rates across customer segments.
+- Writing SQL queries to summarize and analyze group-level results.
+- Developing evidence-based recommendations while distinguishing association from causation.
 
-Dataset: [Kaggle Playground Series S5E8 — Binary Classification with a Bank Dataset](https://www.kaggle.com/competitions/playground-series-s5e8/data)
+**Tools:** Python, pandas, SQL, data visualization
 
-**Limitation:** This competition dataset is synthetic and based on the original Bank Marketing dataset. It should not be described as actual campaign data collected in 2025.
+**Dataset:** [Kaggle Playground Series S5E8 — Binary Classification with a Bank Dataset](https://www.kaggle.com/competitions/playground-series-s5e8/data)
+
+**Important note:** The competition dataset is synthetic and based on the original Bank Marketing dataset. The analysis does not represent actual campaign records collected in 2025.
+
+**Project links:** [Add GitHub repository] · [Add notebook]
 
 ### 2. World Cup First-Goal Analysis
-**Status:** A data analysis project in development
 
-This project explores football match data and questions related to the team that scores the first goal. It is an opportunity to practice data preparation, analysis, and presenting findings clearly.
+**Status:** In Development
 
-- [Add the notebook or repository link]
-- [Add the main question, methods, and verified findings]
+**Objective:** Investigate football match data to explore questions related to which team scores first and how the first goal relates to match outcomes.
 
-## My Approach to Data Analysis
+**Focus areas:**
+- Preparing and validating match data.
+- Exploring patterns related to first goals and match results.
+- Selecting suitable visualizations to communicate findings.
+- Interpreting results in the context of the available data.
 
-1. Define the question before starting the analysis.
-2. Inspect the structure and quality of the data.
-3. Choose suitable tools, such as Python, SQL, and visualizations.
-4. Validate outputs and consider the limitations of the dataset.
-5. Communicate findings clearly, distinguishing what the data shows from assumptions or hypotheses.
+**Tools:** [Add the tools actually used]
 
-## Goals
+**Project links:** [Add GitHub repository or notebook]
 
-I want to keep growing from a learner into a capable data analyst by strengthening my technical foundation, analytical thinking, and communication skills. I see every project as an opportunity to practice, document my reasoning, learn from mistakes, and improve the next version of my work.
+## 🔍 My Analytical Workflow
 
-Thank you for visiting my portfolio!
+1. **Define the problem** — Identify the question the analysis needs to answer.
+2. **Prepare the data** — Inspect data structure, quality, and limitations.
+3. **Analyze** — Use Python, SQL, and statistical techniques where appropriate.
+4. **Visualize** — Present relevant patterns and comparisons clearly.
+5. **Communicate insights** — Explain findings, limitations, and potential implications for decision-making.
 
-## Contact & Links
+## 🎯 Career Objective
 
-- **GitHub:** [Add your GitHub profile link]
-- **LinkedIn:** [Add your LinkedIn profile link, if available]
-- **Email:** [Add your professional contact email]
+I aim to grow as a Data Analyst by combining my engineering background, quantitative foundation, and developing technical skills. I am particularly interested in using data to understand business problems, identify actionable insights, and support better decisions.
+
+I value continuous learning, clear documentation, and analytical work that is transparent, reproducible, and grounded in evidence.
+
+## 📫 Connect with Me
+
+- **GitHub:** [Your GitHub profile URL]
+- **LinkedIn:** [Your LinkedIn URL]
+- **Email:** [Your professional email]
